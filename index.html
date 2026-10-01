@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>지구 vs 달 연직상방 운동 분석 (마션 사전 학습)</title>
+    <title>우주 연직상방 운동 분석 (마션 사전 학습)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -17,8 +17,8 @@
 <body class="flex flex-col h-screen">
 
     <header class="p-3 border-b border-gray-700 bg-slate-900 flex justify-between items-center shrink-0">
-        <h1 class="text-xl font-bold text-blue-400">🚀 아레스 프로젝트 사전 학습: 연직상방 운동 분석</h1>
-        <div class="text-sm text-gray-400">지구와 달의 중력가속도 차이 이해하기</div>
+        <h1 class="text-xl font-bold text-blue-400">🚀 아레스 프로젝트 사전 학습: 다행성 연직상방 운동 분석</h1>
+        <div class="text-sm text-gray-400">행성별 중력가속도 차이 시각적 이해하기</div>
     </header>
 
     <main class="flex-1 flex overflow-hidden p-4 gap-4">
@@ -28,12 +28,18 @@
             
             <div class="glass-panel p-4 rounded-xl shrink-0">
                 <h2 class="text-lg font-bold mb-3 text-yellow-300">1. 실험 환경 선택</h2>
-                <div class="flex gap-4">
-                    <button id="btnEarth" class="flex-1 py-2 rounded-lg font-bold bg-blue-600 hover:bg-blue-500 transition border-2 border-blue-400" onclick="selectEnv('earth')">
-                        🌍 지구 (Earth)
+                <div class="flex gap-2">
+                    <button id="btnEarth" class="env-btn flex-1 py-2 rounded-lg font-bold transition border-2 border-transparent bg-gray-700 hover:bg-gray-600 text-sm text-white" onclick="selectEnv('earth')">
+                        🌍 지구
                     </button>
-                    <button id="btnMoon" class="flex-1 py-2 rounded-lg font-bold bg-gray-700 hover:bg-gray-600 transition border-2 border-transparent" onclick="selectEnv('moon')">
-                        🌕 달 (Moon)
+                    <button id="btnMoon" class="env-btn flex-1 py-2 rounded-lg font-bold transition border-2 border-transparent bg-gray-700 hover:bg-gray-600 text-sm text-white" onclick="selectEnv('moon')">
+                        🌕 달
+                    </button>
+                    <button id="btnMars" class="env-btn flex-1 py-2 rounded-lg font-bold transition border-2 border-transparent bg-gray-700 hover:bg-gray-600 text-sm text-white" onclick="selectEnv('mars')">
+                        🔴 화성
+                    </button>
+                    <button id="btnJupiter" class="env-btn flex-1 py-2 rounded-lg font-bold transition border-2 border-transparent bg-gray-700 hover:bg-gray-600 text-sm text-white" onclick="selectEnv('jupiter')">
+                        🪐 목성
                     </button>
                 </div>
             </div>
@@ -42,18 +48,18 @@
                 <h2 class="text-lg font-bold mb-3 text-green-300">2. 수학적 모델링 및 분석</h2>
                 
                 <div class="mb-4 p-3 bg-slate-800 rounded-lg">
-                    <div class="text-xs text-gray-400 mb-1">주어진 고도 함수 \(h(t)\)</div>
+                    <div class="text-xs text-gray-400 mb-1">주어진 고도 함수 \( h(t) \)</div>
                     <div id="eqDisplay" class="text-xl font-bold text-center py-1">
-                        \(h(t) = 15 + 10t - 5t^2\)
+                        <!-- 수식 표시 영역 -->
                     </div>
                     <div id="eqDesc" class="text-xs text-center text-gray-400 mt-1">
-                        지면으로부터 15m 높이에서 10m/s의 속도로 던져 올린 물체
+                        <!-- 설명 표시 영역 -->
                     </div>
                 </div>
 
                 <div class="flex-1 space-y-3">
                     <div>
-                        <label class="block text-sm text-gray-300 mb-1">속도 함수 \(v(t)\) 를 구하시오.</label>
+                        <label class="block text-sm text-gray-300 mb-1">속도 함수 \( v(t) \) 를 구하시오.</label>
                         <input type="text" id="ans_v" placeholder="예: 10 - 10t">
                     </div>
                     <div class="flex gap-4">
@@ -68,11 +74,11 @@
                     </div>
                     <div class="flex gap-4">
                         <div class="flex-1">
-                            <label class="block text-sm text-gray-300 mb-1">지면(표면)에 닿는 시간 (초)</label>
+                            <label class="block text-sm text-gray-300 mb-1">표면에 닿는 시간 (초)</label>
                             <input type="number" id="ans_endT" placeholder="t = ?">
                         </div>
                         <div class="flex-1">
-                            <label class="block text-sm text-gray-300 mb-1">지면에 닿는 순간의 속도 (m/s)</label>
+                            <label class="block text-sm text-gray-300 mb-1">닿는 순간의 속도 (m/s)</label>
                             <input type="number" id="ans_endV" placeholder="v = ?">
                         </div>
                     </div>
@@ -101,7 +107,7 @@
 
             <!-- 고도 그래프 -->
             <div class="glass-panel p-3 rounded-xl flex flex-col h-1/3 min-h-[150px]">
-                <h3 class="text-sm font-bold text-blue-300 mb-1">고도 그래프 \(h(t)\)</h3>
+                <h3 class="text-sm font-bold text-blue-300 mb-1">고도 그래프 \( h(t) \)</h3>
                 <div class="relative w-full flex-1 min-h-0">
                     <canvas id="heightChart"></canvas>
                 </div>
@@ -109,7 +115,7 @@
             
             <!-- 속도 그래프 -->
             <div class="glass-panel p-3 rounded-xl flex flex-col h-1/3 min-h-[150px]">
-                <h3 class="text-sm font-bold text-red-300 mb-1">속도 그래프 \(v(t)\)</h3>
+                <h3 class="text-sm font-bold text-red-300 mb-1">속도 그래프 \( v(t) \)</h3>
                 <div class="relative w-full flex-1 min-h-0">
                     <canvas id="velocityChart"></canvas>
                 </div>
@@ -123,56 +129,72 @@
         let velocityChartInstance = null;
         let animationFrameId = null;
 
+        // 천체별 데이터 모델링
         const envData = {
             earth: {
                 equationStr: "\\( h(t) = 15 + 10t - 5t^2 \\)",
                 descStr: "지면으로부터 15m 높이에서 10m/s의 속도로 던져 올린 물체",
                 ans_v_patterns: ["10-10t", "-10t+10", "10-10*t"],
-                ans_maxT: 1,
-                ans_maxH: 20,
-                ans_endT: 3,
-                ans_endV: -20,
+                ans_maxT: 1, ans_maxH: 20, ans_endT: 3, ans_endV: -20,
                 h_func: (t) => 15 + 10*t - 5*t*t,
                 v_func: (t) => 10 - 10*t,
-                y_max_h: 25,
-                y_min_v: -25,
-                y_max_v: 15,
-                ballColor: '#3b82f6'
+                y_max_h: 25, y_min_v: -25, y_max_v: 15,
+                ballColor: '#3b82f6', // blue
+                btnClass: 'border-blue-400 bg-blue-600 hover:bg-blue-500'
             },
             moon: {
                 equationStr: "\\( h(t) = 8t - 0.8t^2 \\)",
                 descStr: "달 표면(0m)에서 8m/s의 속도로 던져 올린 물체",
                 ans_v_patterns: ["8-1.6t", "-1.6t+8", "8-1.6*t"],
-                ans_maxT: 5,
-                ans_maxH: 20,
-                ans_endT: 10,
-                ans_endV: -8,
+                ans_maxT: 5, ans_maxH: 20, ans_endT: 10, ans_endV: -8,
                 h_func: (t) => 8*t - 0.8*t*t,
                 v_func: (t) => 8 - 1.6*t,
-                y_max_h: 25,
-                y_min_v: -10,
-                y_max_v: 10,
-                ballColor: '#cbd5e1'
+                y_max_h: 25, y_min_v: -10, y_max_v: 10,
+                ballColor: '#cbd5e1', // slate
+                btnClass: 'border-gray-400 bg-gray-500 hover:bg-gray-400'
+            },
+            mars: {
+                equationStr: "\\( h(t) = 37t - 1.85t^2 \\)",
+                descStr: "화성 표면(0m)에서 37m/s의 속도로 쏘아 올린 MAV 모형",
+                ans_v_patterns: ["37-3.7t", "-3.7t+37", "37-3.7*t"],
+                ans_maxT: 10, ans_maxH: 185, ans_endT: 20, ans_endV: -37,
+                h_func: (t) => 37*t - 1.85*t*t,
+                v_func: (t) => 37 - 3.7*t,
+                y_max_h: 200, y_min_v: -45, y_max_v: 45,
+                ballColor: '#ef4444', // red
+                btnClass: 'border-red-400 bg-red-600 hover:bg-red-500'
+            },
+            jupiter: {
+                equationStr: "\\( h(t) = 50t - 12.5t^2 \\)",
+                descStr: "목성(가스층 0m)에서 50m/s의 속도로 쏘아 올린 탐사선",
+                ans_v_patterns: ["50-25t", "-25t+50", "50-25*t"],
+                ans_maxT: 2, ans_maxH: 50, ans_endT: 4, ans_endV: -50,
+                h_func: (t) => 50*t - 12.5*t*t,
+                v_func: (t) => 50 - 25*t,
+                y_max_h: 60, y_min_v: -60, y_max_v: 60,
+                ballColor: '#f59e0b', // amber
+                btnClass: 'border-yellow-400 bg-yellow-600 hover:bg-yellow-500'
             }
         };
 
         function selectEnv(env) {
             currentEnv = env;
             
-            document.getElementById('btnEarth').className = env === 'earth' 
-                ? "flex-1 py-2 rounded-lg font-bold transition border-2 border-blue-400 bg-blue-600 hover:bg-blue-500" 
-                : "flex-1 py-2 rounded-lg font-bold transition border-2 border-transparent bg-gray-700 hover:bg-gray-600";
-            
-            document.getElementById('btnMoon').className = env === 'moon' 
-                ? "flex-1 py-2 rounded-lg font-bold transition border-2 border-gray-400 bg-gray-600 hover:bg-gray-500" 
-                : "flex-1 py-2 rounded-lg font-bold transition border-2 border-transparent bg-gray-700 hover:bg-gray-600";
+            // 버튼 스타일 초기화 및 적용
+            document.querySelectorAll('.env-btn').forEach(btn => {
+                btn.className = "env-btn flex-1 py-2 rounded-lg font-bold transition border-2 border-transparent bg-gray-700 hover:bg-gray-600 text-sm text-white";
+            });
+            const activeBtnId = 'btn' + env.charAt(0).toUpperCase() + env.slice(1);
+            document.getElementById(activeBtnId).className = `env-btn flex-1 py-2 rounded-lg font-bold transition border-2 text-sm text-white ${envData[env].btnClass}`;
 
+            // 수식 및 텍스트 렌더링
             const data = envData[env];
             document.getElementById('eqDisplay').innerHTML = data.equationStr;
             document.getElementById('eqDesc').innerText = data.descStr;
             
             if (window.MathJax) MathJax.typesetPromise();
 
+            // 입력창 리셋
             document.getElementById('ans_v').value = '';
             document.getElementById('ans_maxT').value = '';
             document.getElementById('ans_maxH').value = '';
@@ -223,7 +245,7 @@
             msgDiv.classList.remove('hidden', 'text-red-400', 'text-green-400');
 
             if (isVCorrect && isMaxTCorrect && isMaxHCorrect && isEndTCorrect && isEndVCorrect) {
-                msgDiv.innerText = "🎉 완벽합니다! 시뮬레이션을 가동합니다.";
+                msgDiv.innerText = `🎉 완벽합니다! [${currentEnv.toUpperCase()}] 시뮬레이션을 가동합니다.`;
                 msgDiv.classList.add('text-green-400');
                 drawCharts();
                 startAnimation();
@@ -244,9 +266,10 @@
             
             const data = envData[currentEnv];
             const startTime = performance.now();
-            const timeScale = currentEnv === 'moon' ? 2000 : 1000; 
             
-            // 궤적을 저장할 배열 초기화
+            // 시각적 지루함을 막기 위해 긴 체공시간(달 10초, 화성 20초)은 배속 처리
+            const timeScale = data.ans_endT > 5 ? 2500 : 1000; 
+            
             let trail = [];
 
             function render(now) {
@@ -264,24 +287,21 @@
                 const topY = 20;
                 const mappedY = bottomY - (currentH / data.y_max_h) * (bottomY - topY);
 
-                // 현재 위치를 궤적 배열에 추가
                 trail.push({ x: canvas.width / 2, y: mappedY });
 
-                // 궤적 점선 그리기
                 if (trail.length > 0) {
                     ctx.beginPath();
                     ctx.moveTo(trail[0].x, trail[0].y);
                     for (let i = 1; i < trail.length; i++) {
                         ctx.lineTo(trail[i].x, trail[i].y);
                     }
-                    ctx.strokeStyle = 'rgba(234, 179, 8, 0.8)'; // 노란색 점선
+                    ctx.strokeStyle = 'rgba(234, 179, 8, 0.8)';
                     ctx.lineWidth = 2;
-                    ctx.setLineDash([5, 5]); // 점선 설정
+                    ctx.setLineDash([5, 5]);
                     ctx.stroke();
-                    ctx.setLineDash([]); // 점선 설정 해제
+                    ctx.setLineDash([]);
                 }
 
-                // 공 그리기
                 ctx.beginPath();
                 ctx.arc(canvas.width / 2, mappedY, 10, 0, Math.PI * 2);
                 ctx.fillStyle = data.ballColor;
@@ -308,7 +328,9 @@
             const h_data = [];
             const v_data = [];
 
-            for (let t = 0; t <= data.ans_endT; t += 0.1) {
+            // 데이터를 더 촘촘하게 렌더링
+            const step = data.ans_endT > 10 ? 0.2 : 0.1;
+            for (let t = 0; t <= data.ans_endT; t += step) {
                 labels.push(t.toFixed(1));
                 h_data.push(data.h_func(t));
                 v_data.push(data.v_func(t));
@@ -353,6 +375,7 @@
             });
         }
         
+        // 앱 실행 시 기본값(지구)
         selectEnv('earth');
     </script>
 </body>
